@@ -1,15 +1,29 @@
 import axios from "axios";
-import express, { Request, response, Response } from "express";
+import express, { Request, Response } from "express";
 
 const app = express();
 
+app.use(express.json());
+
+app.use(express.urlencoded({ extended: true }));
+
 const port = 3000 || 8000;
 
-app.get("/api/hello/visitor_name?", async (req: Request, res: Response) => {
+app.get("/", (req: Request, res: Response) => {
+  res.send("shitttttttttt");
+});
+
+app.get("/api/hello/:visitor_name?", async (req: Request, res: Response) => {
   try {
     const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
 
+    console.log(req.headers["x-forwarded-for"], "shittttttttt");
+
+    console.log(req.socket.remoteAddress, "dumbbbb");
+
     const { visitor_name } = req.params;
+
+    console.log(visitor_name, "from visitor name");
 
     const response = await axios.get(`https://ipapi.co/${ip}/json/`);
     const { city } = response.data;
@@ -31,3 +45,5 @@ app.get("/api/hello/visitor_name?", async (req: Request, res: Response) => {
 app.listen(port, () => {
   console.log("Listening to app on port: " + port);
 });
+
+module.exports = app;
