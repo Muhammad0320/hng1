@@ -10,7 +10,7 @@ app.use(express.urlencoded({ extended: true }));
 const port = 3000 || 8000;
 
 app.get("/", (req: Request, res: Response) => {
-  res.send("shitttttttttt");
+  res.send("1st HNG  backend project");
 });
 
 app.get("/api/hello/:visitor_name?", async (req: Request, res: Response) => {
