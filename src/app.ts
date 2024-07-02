@@ -19,10 +19,6 @@ app.get("/api/hello/:visitor_name?", async (req: Request, res: Response) => {
   try {
     const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
 
-    console.log(req.headers["x-forwarded-for"], "shittttttttt");
-
-    console.log(req.socket.remoteAddress, "dumbbbb");
-
     const { visitor_name } = req.params;
 
     console.log(visitor_name, "from visitor name");
@@ -34,6 +30,7 @@ app.get("/api/hello/:visitor_name?", async (req: Request, res: Response) => {
     const weatherResponse = await axios.get(
       `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${OPENWEATHERMAP_API_KEY}`
     );
+
     const temperature = weatherResponse.data.main.temp;
 
     const data = {
