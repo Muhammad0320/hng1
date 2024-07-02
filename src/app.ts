@@ -1,5 +1,6 @@
 import axios from "axios";
 import express, { Request, Response } from "express";
+import { isThrowStatement } from "typescript";
 
 const app = express();
 
@@ -32,6 +33,8 @@ app.get("/api/hello/:visitor_name?", async (req: Request, res: Response) => {
     );
 
     const temperature = weatherResponse.data.main.temp;
+
+    console.log(temperature, "Temperature in arrea");
 
     const data = {
       ip,
