@@ -12,7 +12,7 @@ const OPENWEATHERMAP_API_KEY = "039fccb2ae16a8483c796ae5bae7ce96";
 const port = 3000 || 8000;
 
 app.get("/", (req: Request, res: Response) => {
-  res.send("1st HNG  backend project");
+  res.send("1st HNG  backend project -- ");
 });
 
 app.get("/api/hello/:visitor_name?", async (req: Request, res: Response) => {
