@@ -15,7 +15,7 @@ app.get("/", (req: Request, res: Response) => {
   res.send("1st HNG  backend project -- ");
 });
 
-app.get("/api/hello/?visitor_name", async (req: Request, res: Response) => {
+app.get("/api/hello", async (req: Request, res: Response) => {
   try {
     const ip = req.headers["x-forwarded-for"]?.[0] || req.socket.remoteAddress;
 

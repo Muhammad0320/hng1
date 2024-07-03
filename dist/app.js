@@ -22,7 +22,7 @@ const port = 3000 || 8000;
 app.get("/", (req, res) => {
     res.send("1st HNG  backend project -- ");
 });
-app.get("/api/hello/?visitor_name", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+app.get("/api/hello", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
     try {
         const ip = ((_a = req.headers["x-forwarded-for"]) === null || _a === void 0 ? void 0 : _a[0]) || req.socket.remoteAddress;
