@@ -24,14 +24,17 @@ app.get("/api/hello/:visitor_name?", async (req: Request, res: Response) => {
     console.log(wait, "from visitor name");
 
     const response = await axios.get(`https://ipapi.co/${ip}/json/`);
+    console.log(response.data, "from card");
     const { city, latitude, longitude } = response.data;
 
     // Get temperature from OpenWeatherMap
-    const weatherResponse = await axios.get(
-      `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${OPENWEATHERMAP_API_KEY}`
-    );
+    // const weatherResponse = await axios.get(
+    //   `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${OPENWEATHERMAP_API_KEY}`
+    // );
 
-    const temperature = weatherResponse.data.main.temp;
+    // const temperature = weatherResponse.data.main.temp;
+
+    const temperature = 11;
 
     console.log(temperature, "Temperature in arrea");
 
