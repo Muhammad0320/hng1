@@ -23,9 +23,8 @@ app.get("/", (req, res) => {
     res.send("1st HNG  backend project -- ");
 });
 app.get("/api/hello", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a;
     try {
-        const ip = ((_a = req.headers["x-forwarded-for"]) === null || _a === void 0 ? void 0 : _a[0]) || req.socket.remoteAddress;
+        const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
         const { visitor_name } = req.query;
         const response = yield axios_1.default.get(`https://ipapi.co/${ip}/json/`);
         console.log(response.data, "from card");

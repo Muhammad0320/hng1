@@ -17,7 +17,7 @@ app.get("/", (req: Request, res: Response) => {
 
 app.get("/api/hello", async (req: Request, res: Response) => {
   try {
-    const ip = req.headers["x-forwarded-for"]?.[0] || req.socket.remoteAddress;
+    const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
 
     const { visitor_name } = req.query;
 
