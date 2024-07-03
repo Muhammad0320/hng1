@@ -22,12 +22,11 @@ const port = 3000 || 8000;
 app.get("/", (req, res) => {
     res.send("1st HNG  backend project -- ");
 });
-app.get("/api/hello/:visitor_name?", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+app.get("/api/hello/visitor_name/:name", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
     try {
         const ip = ((_a = req.headers["x-forwarded-for"]) === null || _a === void 0 ? void 0 : _a[0]) || req.socket.remoteAddress;
-        const wait = req.params;
-        console.log(wait, "from visitor name");
+        const { name } = req.params;
         const response = yield axios_1.default.get(`https://ipapi.co/${ip}/json/`);
         console.log(response.data, "from card");
         const { city, latitude, longitude } = response.data;
@@ -41,7 +40,7 @@ app.get("/api/hello/:visitor_name?", (req, res) => __awaiter(void 0, void 0, voi
         const data = {
             client_ip: ip,
             location: city,
-            greeting: `Hello, ${req.params.visitor_name} !, the temperature is ${temperature || 11.0} degree Celcius in ${city} `,
+            greeting: `Hello, ${name} !, the temperature is ${temperature || 11.0} degree Celcius in ${city} `,
         };
         res.status(200).send(data);
     }

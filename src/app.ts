@@ -15,44 +15,46 @@ app.get("/", (req: Request, res: Response) => {
   res.send("1st HNG  backend project -- ");
 });
 
-app.get("/api/hello/:visitor_name?", async (req: Request, res: Response) => {
-  try {
-    const ip = req.headers["x-forwarded-for"]?.[0] || req.socket.remoteAddress;
+app.get(
+  "/api/hello/visitor_name/:name",
+  async (req: Request, res: Response) => {
+    try {
+      const ip =
+        req.headers["x-forwarded-for"]?.[0] || req.socket.remoteAddress;
 
-    const wait = req.params;
+      const { name } = req.params;
 
-    console.log(wait, "from visitor name");
+      const response = await axios.get(`https://ipapi.co/${ip}/json/`);
+      console.log(response.data, "from card");
+      const { city, latitude, longitude } = response.data;
 
-    const response = await axios.get(`https://ipapi.co/${ip}/json/`);
-    console.log(response.data, "from card");
-    const { city, latitude, longitude } = response.data;
+      // Get temperature from OpenWeatherMap
+      // const weatherResponse = await axios.get(
+      //   `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${OPENWEATHERMAP_API_KEY}`
+      // );
 
-    // Get temperature from OpenWeatherMap
-    // const weatherResponse = await axios.get(
-    //   `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${OPENWEATHERMAP_API_KEY}`
-    // );
+      // const temperature = weatherResponse.data.main.temp;
 
-    // const temperature = weatherResponse.data.main.temp;
+      const temperature = 11;
 
-    const temperature = 11;
+      console.log(temperature, "Temperature in arrea");
 
-    console.log(temperature, "Temperature in arrea");
+      const data = {
+        client_ip: ip,
+        location: city,
 
-    const data = {
-      client_ip: ip,
-      location: city,
+        greeting: `Hello, ${name} !, the temperature is ${
+          temperature || 11.0
+        } degree Celcius in ${city} `,
+      };
 
-      greeting: `Hello, ${req.params.visitor_name} !, the temperature is ${
-        temperature || 11.0
-      } degree Celcius in ${city} `,
-    };
-
-    res.status(200).send(data);
-  } catch (error) {
-    console.error("Error fetching location:", error);
-    res.send("Error fetching location");
+      res.status(200).send(data);
+    } catch (error) {
+      console.error("Error fetching location:", error);
+      res.send("Error fetching location");
+    }
   }
-});
+);
 
 app.listen(port, () => {
   console.log("Listening to app on port: " + port);
