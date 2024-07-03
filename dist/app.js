@@ -17,23 +17,27 @@ const express_1 = __importDefault(require("express"));
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
+const OPENWEATHERMAP_API_KEY = "039fccb2ae16a8483c796ae5bae7ce96";
 const port = 3000 || 8000;
 app.get("/", (req, res) => {
-    res.send("1st HNG  backend project");
+    res.send("1st HNG  backend project -- ");
 });
 app.get("/api/hello/:visitor_name?", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
     try {
-        const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
-        console.log(req.headers["x-forwarded-for"], "shittttttttt");
-        console.log(req.socket.remoteAddress, "dumbbbb");
-        const { visitor_name } = req.params;
-        console.log(visitor_name, "from visitor name");
+        const ip = ((_a = req.headers["x-forwarded-for"]) === null || _a === void 0 ? void 0 : _a[0]) || req.socket.remoteAddress;
+        const wait = req.params;
+        console.log(wait, "from visitor name");
         const response = yield axios_1.default.get(`https://ipapi.co/${ip}/json/`);
-        const { city } = response.data;
+        const { city, latitude, longitude } = response.data;
+        // Get temperature from OpenWeatherMap
+        const weatherResponse = yield axios_1.default.get(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${OPENWEATHERMAP_API_KEY}`);
+        const temperature = weatherResponse.data.main.temp;
+        console.log(temperature, "Temperature in arrea");
         const data = {
-            ip,
+            client_ip: ip,
             location: city,
-            greetings: `Hello, ${visitor_name}!, the temperature is 11 degree Celcius in ${city} `,
+            greeting: `Hello, 00!, the temperature is ${temperature || 11.0} degree Celcius in ${city} `,
         };
         res.status(200).send(data);
     }

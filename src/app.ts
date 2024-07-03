@@ -19,9 +19,9 @@ app.get("/api/hello/:visitor_name?", async (req: Request, res: Response) => {
   try {
     const ip = req.headers["x-forwarded-for"]?.[0] || req.socket.remoteAddress;
 
-    const { visitor_name } = req.params;
+    const wait = req.params;
 
-    console.log(visitor_name, "from visitor name");
+    console.log(wait, "from visitor name");
 
     const response = await axios.get(`https://ipapi.co/${ip}/json/`);
     const { city, latitude, longitude } = response.data;
@@ -39,7 +39,7 @@ app.get("/api/hello/:visitor_name?", async (req: Request, res: Response) => {
       client_ip: ip,
       location: city,
 
-      greeting: `Hello, ${visitor_name}!, the temperature is ${
+      greeting: `Hello, ${req.params.visitor_name} !, the temperature is ${
         temperature || 11.0
       } degree Celcius in ${city} `,
     };
