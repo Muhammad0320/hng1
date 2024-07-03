@@ -1,7 +1,6 @@
 import axios from "axios";
 import express, { Request, Response } from "express";
 
-
 const app = express();
 
 app.use(express.json());
@@ -18,7 +17,7 @@ app.get("/", (req: Request, res: Response) => {
 
 app.get("/api/hello/:visitor_name?", async (req: Request, res: Response) => {
   try {
-    const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
+    const ip = req.headers["x-forwarded-for"]?.[0] || req.socket.remoteAddress;
 
     const { visitor_name } = req.params;
 
