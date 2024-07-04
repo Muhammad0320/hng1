@@ -23,7 +23,8 @@ app.get("/api/hello", async (req: Request, res: Response) => {
 
     const response = await axios.get(`https://ipapi.co/${ip}/json/`);
 
-    
+
+
 
     console.log(response.data, "from card");
     const { city, latitude, longitude } = response.data;
@@ -37,7 +38,7 @@ app.get("/api/hello", async (req: Request, res: Response) => {
 
     // const temperature = weatherResponse.data.main.temp;
 
-    const temperature = 11;
+    const temperature = 13;
 
     console.log(temperature, "Temperature in arrea");
 

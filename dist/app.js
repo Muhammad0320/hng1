@@ -35,7 +35,7 @@ app.get("/api/hello", (req, res) => __awaiter(void 0, void 0, void 0, function* 
         //   `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${OPENWEATHERMAP_API_KEY}`
         // );
         // const temperature = weatherResponse.data.main.temp;
-        const temperature = 11;
+        const temperature = 13;
         console.log(temperature, "Temperature in arrea");
         const data = {
             client_ip: ip,
