@@ -29,6 +29,7 @@ app.get("/api/hello", (req, res) => __awaiter(void 0, void 0, void 0, function* 
         const response = yield axios_1.default.get(`https://ipapi.co/${ip}/json/`);
         console.log(response.data, "from card");
         const { city, latitude, longitude } = response.data;
+        console.log(latitude, longitude);
         // Get temperature from OpenWeatherMap
         // const weatherResponse = await axios.get(
         //   `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${OPENWEATHERMAP_API_KEY}`

@@ -22,8 +22,13 @@ app.get("/api/hello", async (req: Request, res: Response) => {
     const { visitor_name } = req.query;
 
     const response = await axios.get(`https://ipapi.co/${ip}/json/`);
+
+    
+
     console.log(response.data, "from card");
     const { city, latitude, longitude } = response.data;
+
+    console.log(latitude, longitude);
 
     // Get temperature from OpenWeatherMap
     // const weatherResponse = await axios.get(
