@@ -38,7 +38,7 @@ app.get("/api/hello", (req, res) => __awaiter(void 0, void 0, void 0, function* 
         const data = {
             client_ip: ip,
             location: city,
-            greeting: `Hello, ${visitor_name}!, the temperature is ${temperature || 11.0} degree Celcius in ${city} `,
+            greeting: `Hello, ${visitor_name}!, the temperature is ${temperature || 11.0} degrees Celcius in ${city}`,
         };
         res.status(200).send(data);
     }
